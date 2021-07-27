@@ -4,45 +4,37 @@
 
 <CheckboxRange>:
     group: "range_of_pages"
-    size_hint_x: .1
-#    size_hint_x: None
-#    size: dp(37), dp(37)
-    pos_hint_x: {"right": .5}
+    size_hint_x: .4
 
 <Container>:
     orientation: "vertical"
     padding: dp(10)
+#    spacing: dp(20)
 
-    BoxLayout:
-        orientation: "vertical"
-#        size_hint_y: .8
-        canvas:
-            Color:
-                rgba: 0, 1, 0, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        MDTextField:
-            id: tf_lang
-            size_hint_x: None
-            width: dp(150)
-            pos_hint: {"center_x": .5, "top": 0}
-            hint_text: "Language:"
-            on_focus: if self.focus: app.menu_lang.open()
-        MDLabel:
-            id: lbl_print
-            text: "Print:"
-            text_size: self.size
-            halign: "center"
-            valign: "bottom"
-            size_hint_x: None
-            width: dp(200)
-            pos_hint: {"center_x": .5, "top": 0}
-        BoxLayout:
-#            size_hint_x: None
-#            width: dp(400)
-            size_hint_y: .6
-            pos_hint: {"x": .40, "top": 0}
+    FloatLayout:
+#        canvas:
+#            Color:
+#                rgba: 0, 1, 0, 1
+#            Rectangle:
+#                pos: self.pos
+#                size: self.size
+        GridLayout:
+            cols: 1
+            pos_hint: {"center_x": .5, "top": 1}
+            size_hint: .3, .15
+            MDTextField:
+                id: tf_lang
+                hint_text: "Language:"
+                on_focus: if self.focus: app.menu_lang.open()
+            MDLabel:
+                text: "Print:"
+                text_size: self.size
+                halign: "center"
+                valign: "bottom"
+        GridLayout:
+            rows: 1
+            pos_hint: {"center_x": .5, "top": .85}
+            size_hint: .3, .05
             CheckboxRange:
                 active: True
             MDLabel:
@@ -50,54 +42,82 @@
                 text_size: self.size
                 halign: "left"
                 valign: "center"
-                pos_hint_x: {"x": .5}
-#                size_hint_x: .9
-        BoxLayout:
-#            size_hint_x: None
-#            width: dp(400)
-            size_hint_y: .6
-            pos_hint: {"x": .40, "top": 0}
+        GridLayout:
+            rows: 1
+            pos_hint: {"center_x": .5, "top": .8}
+            size_hint: .3, .05
             CheckboxRange:
             MDLabel:
                 text: "The range"
                 text_size: self.size
                 halign: "left"
                 valign: "center"
-                pos_hint_x: {"x": .5}
-#                size_hint_x: .9
+        GridLayout:
+            rows: 2
+            pos_hint: {"center_x": .5, "top": .75}
+            size_hint: .1, .15
+            MDTextField:
+                id: tf_first_page
+                hint_text: "The first page"
+                helper_text: "Can't be empty"
+                helper_text_mode: "on_error"
+                required: True
+                input_filter: "int"
+#                on_focus: if self.focus: app.menu_lang.open()
+            MDTextField:
+                id: tf_last_page
+                hint_text: "The last page"
+                helper_text: "Can't be empty"
+                helper_text_mode: "on_error"
+                required: True
+                input_filter: "int"
+#                on_focus: if self.focus: app.menu_lang.open()
+#        MDRaisedButton:
+        MDRectangleFlatButton:
+            text: "Calculate"
+            size_hint: .8, .1
+            pos_hint: {"center_x": .5, "top": .55}
+#            on_release: app.root?
+        GridLayout:
+            rows: 2
+            pos_hint: {"x": 0, "top": .40}
+            size_hint: 1, .15
+            MDTextField:
+                id: tf_face_pages
+                hint_text: "Face pages"
+                input_filter: "int"
+#                on_focus: if self.focus: app.menu_lang.open()
+            MDTextField:
+                id: tf_verso_pages
+                hint_text: "Verso pages"
+                input_filter: "int"
+#                on_focus: if self.focus: app.menu_lang.open()
+        GridLayout:
+            rows: 3
+            pos_hint: {"x": 0, "top": .22}
+            size_hint: 1, .15
+            MDLabel:
+                text: "Total pages for printing: {}".format(8)
+                text_size: self.size
+                halign: "left"
+                valign: "center"
+            MDLabel:
+                text: "Necessary sheets for printing: {}".format(4)
+                text_size: self.size
+                halign: "left"
+                valign: "center"
+            MDLabel:
+                text: "The middle of the booklet: {}".format((4, 5))
+                text_size: self.size
+                halign: "left"
+                valign: "center"
         Widget:
-        BoxLayout:
-#            size_hint_x: None
-#            width: dp(400)
-            size_hint_y: .7
-            pos_hint: {"x": .20, "top": 0}
-            canvas:
-                Color:
-                    rgba: 1, 1, 0, 1
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            MDLabel:
-                text: "The first page: "
-                text_size: self.size
-                halign: "left"
-                valign: "center"
-                pos_hint_x: {"x": .5}
-#                size_hint_x: .9
-        BoxLayout:
-#            size_hint_x: None
-#            width: dp(400)
-            size_hint_y: .7
-            pos_hint: {"x": .20, "top": 0}
-            MDLabel:
-                text: "The last page: "
-                text_size: self.size
-                halign: "left"
-                valign: "center"
-                pos_hint_x: {"x": .5}
-#                size_hint_x: .9
+#        MDRaisedButton:
+        MDRectangleFlatButton:
+            text: "Close"
+            pos_hint: {"right": 1, "y": 0}
+#            on_release: app.root?
 
-    Widget:
 #            canvas:
 #                Color:
 #                    rgba: 0, 1, 0, 1
