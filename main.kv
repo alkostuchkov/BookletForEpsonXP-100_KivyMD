@@ -4,9 +4,7 @@
 
 <CheckboxRange>:
     group: "range_of_pages"
-    size_hint: None, None
-    size: dp(48), dp(48)
-    pos_hint: {"right": .5, "center_y": .5}
+    size_hint_x: .1
 
 <Container>:
     orientation: "vertical"
@@ -14,58 +12,66 @@
 
     BoxLayout:
         orientation: "vertical"
-        MDTextField:
-            id: tf_lang
-            size_hint: None, .15
-            width: dp(200)
-#            height: dp(30)
-            pos_hint: {"center_x": .5}
-            hint_text: "Language:"
-            on_focus: if self.focus: app.menu_lang.open()
-        MDLabel:
-            text: "Print:"
-            text_size: self.size
-            halign: "center"
-            valign: "bottom"
-            size_hint: .2, .1
-            pos_hint: {"center_x": .5, "center_y": .5}
         BoxLayout:
-            orientation: "horizontal"
-#        RelativeLayout:
-#            canvas:
-#                Color:
-#                    rgba: 0, 0, 1, 1
-#                Rectangle:
-#                    pos: self.pos
-#                    size: self.size
-            size_hint: .2, .1
-            pos_hint: {"center_x": .5}
-            CheckboxRange:
-#                canvas.before:
-#                    Color:
-#                        rgba: 1, 1, 0, 1
-#                    Rectangle:
-#                        pos: self.pos
-#                        size: self.size
-                active: True
+            size_hint_y: .3
+            canvas:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Widget:
+            MDTextField:
+                canvas.before:
+                    Color:
+                        rgba: 1, 0, 0, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                id: tf_lang
+                size_hint_x: .3
+                pos_hint_y: {"y": 0}
+                hint_text: "Language:"
+                on_focus: if self.focus: app.menu_lang.open()
+            Widget:
+        BoxLayout:
+            size_hint_y: .1
+            Widget:
             MDLabel:
-                text: "All pages"
-                size_hint: .5, .1
-                pos_hint: {"right": 1, "center_y": .5}
+                text: "Print:"
+                text_size: self.size
+                halign: "center"
+                valign: "bottom"
+                size_hint_x: .3
+            Widget:
         BoxLayout:
-            orientation: "horizontal"
-#        RelativeLayout:
+            orientation: "vertical"
+            size_hint_y: .2
+            BoxLayout:
+                Widget:
+                CheckboxRange:
+                    active: True
+                MDLabel:
+                    text: "All pages"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "center"
+                    size_hint_x: .3
+                Widget:
+            BoxLayout:
+                Widget:
+                CheckboxRange:
+                MDLabel:
+                    text: "The range"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "center"
+                    size_hint_x: .3
+                Widget:
+        Widget:
 #            canvas:
 #                Color:
 #                    rgba: 0, 1, 0, 1
 #                Rectangle:
 #                    pos: self.pos
 #                    size: self.size
-            size_hint: .2, .1
-            pos_hint: {"center_x": .5}
-            CheckboxRange:
-            MDLabel:
-                text: "The range"
-                size_hint: .5, .1
-                pos_hint: {"right": 1, "center_y": .5}
-        Widget:
