@@ -4,14 +4,13 @@
 
 <MainContainer>:
     orientation: "vertical"
-    padding: dp(10)
-#    spacing: dp(20)
-
+    my_font_size: dp(25)
     MDToolbar:
         id: toolbar
         elevation: 10
         title: "Booklet for Epson XP-100"
-        pos_hint: {"top": 1, "x": 0}
+        pos_hint: {"x": 0, "top": 1}
+        size_hint_y: .1
         left_action_items: [['menu', lambda x: app.root.ids["nav_drawer"].set_state("open")]]
         right_action_items: [["dots-vertical", lambda x: app.dots_function()]]
     BoxLayout:
@@ -19,28 +18,18 @@
         padding: dp(10)
         FloatLayout:
             GridLayout:
-                canvas:
-                    Color:
-                        rgba: 0, 1, 0, 1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
                 cols: 1
-                pos_hint: {"center_x": .5, "top": 1}
-                size_hint: .3, .25
-                size_hint: .3, .15
-                MDTextField:
-                    id: tf_lang
-                    hint_text: "Language:"
-                    on_focus: if self.focus: app.menu_lang.open()
+                pos_hint: {"center_x": .5, "top": .96}
+                size_hint: .3, .05
                 MDLabel:
                     text: "Print:"
                     text_size: self.size
                     halign: "center"
                     valign: "bottom"
+                    font_size: root.my_font_size - 5
             GridLayout:
                 rows: 1
-                pos_hint: {"center_x": .5, "top": .85}
+                pos_hint: {"center_x": .5, "top": .9}
                 size_hint: .3, .05
                 CheckboxRange:
                     active: True
@@ -49,9 +38,10 @@
                     text_size: self.size
                     halign: "left"
                     valign: "center"
+                    font_size: root.my_font_size - 7
             GridLayout:
                 rows: 1
-                pos_hint: {"center_x": .5, "top": .8}
+                pos_hint: {"center_x": .5, "top": .85}
                 size_hint: .3, .05
                 CheckboxRange:
                 MDLabel:
@@ -59,9 +49,10 @@
                     text_size: self.size
                     halign: "left"
                     valign: "center"
+                    font_size: root.my_font_size - 7
             GridLayout:
                 rows: 2
-                pos_hint: {"center_x": .5, "top": .75}
+                pos_hint: {"center_x": .5, "top": .8}
                 size_hint: .1, .15
                 MDTextField:
                     id: tf_first_page
@@ -70,6 +61,7 @@
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
+                    font_size: root.my_font_size - 5
     #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_last_page
@@ -78,26 +70,29 @@
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
+                    font_size: root.my_font_size - 5
     #                on_focus: if self.focus: app.menu_lang.open()
-    #        MDRaisedButton:
             MDRectangleFlatButton:
                 text: "Calculate"
                 size_hint: .8, .1
-                pos_hint: {"center_x": .5, "top": .55}
+                pos_hint: {"center_x": .5, "top": .6}
+                font_size: root.my_font_size
     #            on_release: app.root?
             GridLayout:
                 rows: 2
-                pos_hint: {"x": 0, "top": .40}
+                pos_hint: {"x": 0, "top": .45}
                 size_hint: 1, .15
                 MDTextField:
                     id: tf_face_pages
                     hint_text: "Face pages"
                     input_filter: "int"
+                    font_size: root.my_font_size - 5
     #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_verso_pages
                     hint_text: "Verso pages"
                     input_filter: "int"
+                    font_size: root.my_font_size - 5
     #                on_focus: if self.focus: app.menu_lang.open()
             GridLayout:
                 rows: 3
@@ -109,18 +104,21 @@
                     text_size: self.size
                     halign: "left"
                     valign: "center"
+                    font_size: root.my_font_size - 5
                 MDLabel:
                     id: lbl_necessary_sheets
                     text: "Necessary sheets for printing: {}".format(4)
                     text_size: self.size
                     halign: "left"
                     valign: "center"
+                    font_size: root.my_font_size - 5
                 MDLabel:
                     id: lbl_middle_of_booklet
                     text: "The middle of the booklet: {}".format((4, 5))
                     text_size: self.size
                     halign: "left"
                     valign: "center"
+                    font_size: root.my_font_size - 5
 #            Widget:
 #    #        MDRaisedButton:
 #            MDRectangleFlatButton:

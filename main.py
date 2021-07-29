@@ -86,8 +86,8 @@ class MainApp(MDApp):
 
         icons_item = {
             "web": "Language",
-            "about": "About",
             "account": "About author",
+            "information-outline": "About",
             "exit-to-app": "Exit"
         }
         for icon_name in icons_item.keys():
