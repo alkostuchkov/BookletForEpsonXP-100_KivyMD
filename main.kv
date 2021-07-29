@@ -1,41 +1,33 @@
-<IconListItem>:
-    IconLeftWidget:
-        icon: root.icon
-
 <CheckboxRange>:
     group: "range_of_pages"
     size_hint_x: .4
 
-<Container>:
+<MainContainer>:
     orientation: "vertical"
-#    padding: dp(10)
+    padding: dp(10)
 #    spacing: dp(20)
 
     MDToolbar:
-        id: tbar
+        id: toolbar
+        elevation: 10
         title: "Booklet for Epson XP-100"
         pos_hint: {"top": 1, "x": 0}
-#        size_hint_y: .1
-#        padding: dp(10)
-#        spacing: dp(12)
-        elevation: dp(10)
-        left_action_items: [["menu", lambda x: app.show_nav_drawer()]]
+        left_action_items: [['menu', lambda x: app.root.ids["nav_drawer"].set_state("open")]]
         right_action_items: [["dots-vertical", lambda x: app.dots_function()]]
-
     BoxLayout:
         orientation: "vertical"
         padding: dp(10)
-#        spacing: dp(10)
         FloatLayout:
-#            canvas:
-#                Color:
-#                    rgba: 0, 1, 0, 1
-#                Rectangle:
-#                    pos: self.pos
-#                    size: self.size
             GridLayout:
+                canvas:
+                    Color:
+                        rgba: 0, 1, 0, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 cols: 1
                 pos_hint: {"center_x": .5, "top": 1}
+                size_hint: .3, .25
                 size_hint: .3, .15
                 MDTextField:
                     id: tf_lang
@@ -135,6 +127,55 @@
 #                text: "Close"
 #                pos_hint: {"right": 1, "y": 0}
 #    #            on_release: app.root?
+
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        # text_color: root.text_color
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/images/booklet.ico"
+    MDLabel:
+        text: "Booklet for Epson XP-100"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+    MDLabel:
+        text: "alkostuchkov@gmail.com"
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+    ScrollView:
+        DrawerList:
+            id: md_list
+
+<MainScreen>:
+    MDNavigationLayout:
+        ScreenManager:
+            MDScreen:
+                MainContainer:
+#                    Widget:
+        MDNavigationDrawer:
+            id: nav_drawer
+            ContentNavigationDrawer:
+                id: content_drawer
 
 #            canvas:
 #                Color:
