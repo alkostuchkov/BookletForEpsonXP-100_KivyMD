@@ -132,12 +132,18 @@
         self.parent.set_color_item(self)
         app.nav_drawer_funcs_dict[self.text](self)
 #        app.nav_drawer_funcs_dict[self.text]()
-
     IconLeftWidget:
         id: icon
         icon: root.icon
         theme_text_color: "Custom"
         text_color: root.text_color
+
+<IconListItem>:
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+#        text_color: root.text_color
 
 <ContentNavigationDrawer>:
     orientation: "vertical"

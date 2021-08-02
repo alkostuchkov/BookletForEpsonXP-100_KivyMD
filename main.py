@@ -18,6 +18,7 @@ class IconListItem(OneLineAvatarIconListItem):
     icon = StringProperty()
 
 
+
 class CheckboxRange(MDCheckbox):
     pass
 
