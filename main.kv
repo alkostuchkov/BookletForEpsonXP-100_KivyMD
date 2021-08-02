@@ -32,7 +32,13 @@
                 pos_hint: {"center_x": .5, "top": .9}
                 size_hint: .3, .05
                 CheckboxRange:
+                    id: chbox_allpages
                     active: True
+                    # To avoid both of checkboxes to be inactive
+                    on_active:
+                        if not self.active and not root.ids["chbox_range"].active: self.active = True
+#                    active: True
+#                    on_release: root.
                 MDLabel:
                     text: "All pages"
                     text_size: self.size
@@ -44,6 +50,12 @@
                 pos_hint: {"center_x": .5, "top": .85}
                 size_hint: .3, .05
                 CheckboxRange:
+                    id: chbox_range
+#                    active: False
+                    # To avoid both of checkboxes to be inactive
+                    on_active:
+                        if not self.active and not root.ids["chbox_allpages"].active: self.active = True
+#                    on_release: root.
                 MDLabel:
                     text: "The range"
                     text_size: self.size
@@ -73,11 +85,12 @@
                     font_size: root.my_font_size - 5
     #                on_focus: if self.focus: app.menu_lang.open()
             MDRectangleFlatButton:
+                id: btn_calculate
                 text: "Calculate"
                 size_hint: .8, .1
                 pos_hint: {"center_x": .5, "top": .6}
                 font_size: root.my_font_size
-    #            on_release: app.root?
+                on_release: root.calculate()
             GridLayout:
                 rows: 2
                 pos_hint: {"x": 0, "top": .45}
@@ -131,7 +144,6 @@
     on_release:
         self.parent.set_color_item(self)
         app.nav_drawer_funcs_dict[self.text](self)
-#        app.nav_drawer_funcs_dict[self.text]()
     IconLeftWidget:
         id: icon
         icon: root.icon
@@ -143,7 +155,7 @@
         id: icon
         icon: root.icon
         theme_text_color: "Custom"
-#        text_color: root.text_color
+        text_color: root.text_color
 
 <ContentNavigationDrawer>:
     orientation: "vertical"
@@ -178,6 +190,7 @@
         ScreenManager:
             MDScreen:
                 MainContainer:
+                    id: main_container
 #                    Widget:
         MDNavigationDrawer:
             id: nav_drawer

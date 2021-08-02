@@ -14,17 +14,17 @@ from kivymd.uix.selectioncontrol import MDCheckbox
 from kivy.metrics import dp
 
 
-class IconListItem(OneLineAvatarIconListItem):
-    icon = StringProperty()
-
-
-
 class CheckboxRange(MDCheckbox):
     pass
 
 
 class ContentNavigationDrawer(BoxLayout):
     pass
+
+
+class IconListItem(OneLineAvatarIconListItem):
+    icon = StringProperty()
+    text_color = ListProperty((0, 0, 0, 1))
 
 
 class ItemDrawer(OneLineIconListItem):
@@ -50,7 +50,8 @@ class MainScreen(MDScreen):
 
 class MainContainer(BoxLayout):
     """MainContainer in App Root screen."""
-    pass
+    def calculate(self):
+        print("Calculate")
 
 
 class MainApp(MDApp):
@@ -111,7 +112,6 @@ class MainApp(MDApp):
         self.menu_dots = MDDropdownMenu(
             items=self.menu_dots_items,
             position="auto",
-            # position="bottom",
             width_mult=4
         )
         return MainScreen()
@@ -143,16 +143,14 @@ class MainApp(MDApp):
         self.menu_lang.dismiss()
         print(f"menu_lang_items {chosen_item}")
 
-    def show_about(self, instance):
+    def show_about(self, chosen_item):
         print("About")
 
-    def show_about_author(self, instance):
+    def show_about_author(self, chosen_item):
         print("About author")
 
-    def change_language(self, instance):
+    def change_language(self, chosen_item):
         print("Change language")
-        print(instance)
-        self.menu_lang.open()
 
 
 if __name__ in ("__main__", "__android__"):
