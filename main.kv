@@ -8,11 +8,11 @@
     MDToolbar:
         id: toolbar
         elevation: 10
-        title: "Booklet for Epson XP-100"
+        title: app.title
         pos_hint: {"x": 0, "top": 1}
         size_hint_y: .1
         left_action_items: [['menu', lambda x: app.root.ids["nav_drawer"].set_state("open")]]
-        right_action_items: [["dots-vertical", lambda x: app.dots_function()]]
+        right_action_items: [["dots-vertical", lambda x: app.tbar_dots_callback(x)]]
     BoxLayout:
         orientation: "vertical"
         padding: dp(10)
@@ -128,13 +128,16 @@
 
 <ItemDrawer>:
     theme_text_color: "Custom"
-    on_release: self.parent.set_color_item(self)
+    on_release:
+        self.parent.set_color_item(self)
+        app.nav_drawer_funcs_dict[self.text](self)
+#        app.nav_drawer_funcs_dict[self.text]()
 
     IconLeftWidget:
         id: icon
         icon: root.icon
         theme_text_color: "Custom"
-        # text_color: root.text_color
+        text_color: root.text_color
 
 <ContentNavigationDrawer>:
     orientation: "vertical"
@@ -151,7 +154,7 @@
             size: "56dp", "56dp"
             source: "data/images/booklet.ico"
     MDLabel:
-        text: "Booklet for Epson XP-100"
+        text: app.title
         font_style: "Button"
         size_hint_y: None
         height: self.texture_size[1]
