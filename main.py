@@ -4,6 +4,7 @@ from kivymd.app import MDApp
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
+from kivymd.toast import toast
 from kivymd.uix.list import (
     OneLineAvatarIconListItem,
     OneLineIconListItem, MDList,
@@ -45,13 +46,36 @@ class DrawerList(ThemableBehavior, MDList):
 
 class MainScreen(MDScreen):
     """App Root."""
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+    #     print(self.ids["main_container"].ids["btn_calculate"].text)
     pass
 
 
 class MainContainer(BoxLayout):
     """MainContainer in App Root screen."""
-    def calculate(self):
-        print("Calculate")
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+
+    def calculate(self, first_page, last_page):
+        """Calculate result."""
+        # root = MDApp.get_running_app().root
+        # print(root.ids)
+
+        if not first_page:
+            toast("The first page can't be empty")
+            self.ids["tf_first_page"].focus = True
+        else:
+            first_page = int(first_page)
+            if not last_page:
+                toast("The last page can't be empty")
+                self.ids["tf_last_page"].focus = True
+            else:
+                last_page = int(last_page)
+
+        if first_page <= 0:
+            toast("Amount of pages must be more than 0")
+            self.ids["tf_first_page"].focus = True
 
 
 class MainApp(MDApp):
