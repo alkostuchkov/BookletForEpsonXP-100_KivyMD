@@ -37,6 +37,7 @@
                     on_active:
                         # To avoid both of checkboxes to be inactive at the same time
                         if not self.active and not root.ids["chbox_range"].active: self.active = True
+                        # Make some some widgets disabled and invisible
                         root.ids["tf_first_page"].disabled = True
                         root.ids["tf_first_page"].text = "1"
                         root.ids["tf_last_page"].text = ""
@@ -60,6 +61,7 @@
                     on_active:
                         # To avoid both of checkboxes to be inactive at the same time
                         if not self.active and not root.ids["chbox_allpages"].active: self.active = True
+                        # Make some some widgets disabled and invisible
                         root.ids["tf_first_page"].disabled = False
                         root.ids["tf_first_page"].text = ""
                         root.ids["tf_last_page"].text = ""
@@ -88,7 +90,6 @@
                     input_filter: "int"
                     text: "1"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_last_page
                     hint_text: "The last page"
@@ -97,7 +98,6 @@
                     required: True
                     input_filter: "int"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
             MDRectangleFlatButton:
                 id: btn_calculate
                 text: "Calculate"
@@ -106,9 +106,6 @@
                 font_size: root.my_font_size
                 on_release:
                     root.calculate(root.ids["tf_first_page"].text, root.ids["tf_last_page"].text)
-                    root.ids["lbl_total_pages_for_printing"].opacity = 1
-                    root.ids["lbl_necessary_sheets"].opacity = 1
-                    root.ids["lbl_middle_of_booklet"].opacity = 1
             GridLayout:
                 rows: 2
                 pos_hint: {"x": 0, "top": .45}
@@ -116,22 +113,18 @@
                 MDTextField:
                     id: tf_face_pages
                     hint_text: "Face pages"
-                    input_filter: "int"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_verso_pages
                     hint_text: "Verso pages"
-                    input_filter: "int"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
             GridLayout:
                 rows: 3
                 pos_hint: {"x": 0, "top": .22}
                 size_hint: 1, .15
                 MDLabel:
                     id: lbl_total_pages_for_printing
-                    text: "Total pages for printing: {}".format(8)
+                    text: "Total pages for printing: "
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -139,7 +132,7 @@
                     opacity: 0
                 MDLabel:
                     id: lbl_necessary_sheets
-                    text: "Necessary sheets for printing: {}".format(4)
+                    text: "Necessary sheets for printing: "
                     text_size: self.size
                     halign: "left"
                     valign: "center"
