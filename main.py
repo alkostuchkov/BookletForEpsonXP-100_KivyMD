@@ -4,6 +4,7 @@ from kivymd.app import MDApp
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
+from kivymd.toast import toast
 from kivymd.uix.list import (
     OneLineAvatarIconListItem,
     OneLineIconListItem, MDList,
@@ -45,13 +46,100 @@ class DrawerList(ThemableBehavior, MDList):
 
 class MainScreen(MDScreen):
     """App Root."""
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+    #     print(self.ids["main_container"].ids["btn_calculate"].text)
     pass
 
 
 class MainContainer(BoxLayout):
     """MainContainer in App Root screen."""
-    def calculate(self):
-        print("Calculate")
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+
+    def calculate(self, first_page, last_page):
+        """Calculate result."""
+        # root = MDApp.get_running_app().root
+        # print(root.ids)
+
+        if not first_page:
+            toast("The first page can't be empty")
+            self.ids["tf_first_page"].focus = True
+            return
+        else:
+            first_page = int(first_page)
+            if not last_page:
+                toast("The last page can't be empty")
+                self.ids["tf_last_page"].focus = True
+                return
+            else:
+                last_page = int(last_page)
+
+        if first_page <= 0:
+            toast("Amount of pages must be more than 0")
+            self.ids["tf_first_page"].focus = True
+            return
+        if (last_page - first_page) < 0:
+            toast("The last page cannot be less than the first one")
+            self.ids["tf_last_page"].focus = True
+            return
+
+        # Рассчитываем сколько страниц нужно напечатать
+        # Calculate how many sheets need to print
+        amount_pages = (last_page - first_page) + 1
+
+        # Проверка количества страниц кратности 4 (4 страницы на 1 листе!)
+        # Если не кратно 4, то добавляем по 1, пока не будет кратно 4
+        while (amount_pages % 4) != 0:
+            amount_pages += 1  # теперь последняя страница = amount_pages
+
+        # Вывод итогового количества страниц и листов
+        self.ids["lbl_total_pages_for_printing"].text = f"Total pages for printing: {amount_pages}"
+        self.ids["lbl_total_pages_for_printing"].opacity = 1
+
+        # Необходимое количество листов для печати
+        amount_sheets = amount_pages // 4
+        self.ids["lbl_necessary_sheets"].text = f"Necessary sheets for printing: {amount_sheets}"
+        self.ids["lbl_necessary_sheets"].opacity = 1
+
+        # Находим левую страницу середины брошюры left_face_page
+        left_face_page = first_page + (amount_pages // 2 - 1)
+        # Находим правую страницу середины брошюры right_face_page
+        right_face_page = left_face_page + 1
+        # Вывод страниц середины брошюры
+        self.ids["lbl_middle_of_booklet"].text = f"The middle of the booklet: {left_face_page}, {right_face_page}"
+        self.ids["lbl_middle_of_booklet"].opacity = 1
+
+        # Находим левую оборотную страницу left_verso_page
+        left_verso_page = left_face_page - 1
+        # //Находим правую оборотную страницу right_verso_page
+        right_verso_page = right_face_page + 1
+
+        # Вычисляем и печатаем левые и правые лицевые страницы
+        tmp_string = ""
+        while (left_face_page >= (first_page + 1)) or (right_face_page <= (amount_pages - 1)):
+            if right_face_page != (first_page + (amount_pages - 2)):
+                tmp_string += f"{left_face_page},{right_face_page},"
+            else:  # после последней правой страницы не ставим запятую
+                tmp_string += f"{left_face_page},{right_face_page}"
+
+            left_face_page -= 2
+            right_face_page += 2
+
+        self.ids["tf_face_pages"].text = tmp_string
+        tmp_string = ""  # обнуляем временную строку
+
+        # Вычисляем и печатаем левые и правые оборотные страницы
+        while (left_verso_page >= first_page) or (right_verso_page <= amount_pages):
+            if right_verso_page != (first_page + (amount_pages - 1)):
+                tmp_string += f"{right_verso_page},{left_verso_page},"
+            else:  # после последней правой страницы не ставим запятую
+                tmp_string += f"{right_verso_page},{left_verso_page}"
+
+            left_verso_page -= 2
+            right_verso_page += 2
+
+        self.ids["tf_verso_pages"].text = tmp_string
 
 
 class MainApp(MDApp):
