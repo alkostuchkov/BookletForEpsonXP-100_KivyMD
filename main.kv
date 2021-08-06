@@ -22,7 +22,7 @@
                 pos_hint: {"center_x": .5, "top": .96}
                 size_hint: .3, .05
                 MDLabel:
-                    text: "Print:"
+                    text: app.tr._("Print:")
                     text_size: self.size
                     halign: "center"
                     valign: "bottom"
@@ -47,7 +47,7 @@
                         root.ids["lbl_necessary_sheets"].opacity = 0
                         root.ids["lbl_middle_of_booklet"].opacity = 0
                 MDLabel:
-                    text: "All pages"
+                    text: app.tr._("All pages")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -71,7 +71,7 @@
                         root.ids["lbl_necessary_sheets"].opacity = 0
                         root.ids["lbl_middle_of_booklet"].opacity = 0
                 MDLabel:
-                    text: "The range"
+                    text: app.tr._("The range")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -83,8 +83,8 @@
                 MDTextField:
                     id: tf_first_page
                     disabled: True
-                    hint_text: "The first page"
-                    helper_text: "Can't be empty"
+                    hint_text: app.tr._("The first page")
+                    helper_text: app.tr._("Can't be empty")
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
@@ -92,15 +92,15 @@
                     font_size: root.my_font_size - 5
                 MDTextField:
                     id: tf_last_page
-                    hint_text: "The last page"
-                    helper_text: "Can't be empty"
+                    hint_text: app.tr._("The last page")
+                    helper_text: app.tr._("Can't be empty")
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
                     font_size: root.my_font_size - 5
             MDRectangleFlatButton:
                 id: btn_calculate
-                text: "Calculate"
+                text: app.tr._("Calculate")
                 size_hint: .8, .1
                 pos_hint: {"center_x": .5, "top": .6}
                 font_size: root.my_font_size
@@ -112,11 +112,11 @@
                 size_hint: 1, .15
                 MDTextField:
                     id: tf_face_pages
-                    hint_text: "Face pages"
+                    hint_text: app.tr._("Face pages")
                     font_size: root.my_font_size - 5
                 MDTextField:
                     id: tf_verso_pages
-                    hint_text: "Verso pages"
+                    hint_text: app.tr._("Verso pages")
                     font_size: root.my_font_size - 5
             GridLayout:
                 rows: 3
@@ -124,7 +124,7 @@
                 size_hint: 1, .15
                 MDLabel:
                     id: lbl_total_pages_for_printing
-                    text: "Total pages for printing: "
+                    text: app.tr._("Total pages for printing: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -132,7 +132,7 @@
                     opacity: 0
                 MDLabel:
                     id: lbl_necessary_sheets
-                    text: "Necessary sheets for printing: "
+                    text: app.tr._("Necessary sheets for printing: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -140,7 +140,7 @@
                     opacity: 0
                 MDLabel:
                     id: lbl_middle_of_booklet
-                    text: "The middle of the booklet: {}".format((4, 5))
+                    text: app.tr._("The middle of the booklet: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"

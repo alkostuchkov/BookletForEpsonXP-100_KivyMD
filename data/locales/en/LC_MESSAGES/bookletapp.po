@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2021-08-06 18:06+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.kv:25
+msgid "Print:"
+msgstr ""
+
+#: main.kv:50
+msgid "All pages"
+msgstr ""
+
+#: main.kv:74
+msgid "The range"
+msgstr ""
+
+#: main.kv:86
+msgid "The first page"
+msgstr ""
+
+#: main.kv:87 main.kv:96
+msgid "Can't be empty"
+msgstr ""
+
+#: main.kv:95
+msgid "The last page"
+msgstr ""
+
+#: main.kv:103
+msgid "Calculate"
+msgstr ""
+
+#: main.kv:115
+msgid "Face pages"
+msgstr ""
+
+#: main.kv:119
+msgid "Verso pages"
+msgstr ""
+
+#: main.kv:127
+msgid "Total pages for printing: "
+msgstr ""
+
+#: main.kv:135
+msgid "Necessary sheets for printing: "
+msgstr ""
+
+#: main.kv:143
+msgid "The middle of the booklet: "
+msgstr ""
+
+#: main.py:73
+msgid "The first page can't be empty"
+msgstr ""
+
+#: main.py:79
+msgid "The last page can't be empty"
+msgstr ""
+
+#: main.py:86
+msgid "Amount of pages must be more than 0"
+msgstr ""
+
+#: main.py:90
+msgid "The last page cannot be less than the first one"
+msgstr ""
+
+#: main.py:105
+msgid "Total pages for printing: {}"
+msgstr ""
+
+#: main.py:111
+msgid "Necessary sheets for printing: {}"
+msgstr ""
+
+#: main.py:120
+msgid "The middle of the booklet: {}, {}"
+msgstr ""
+
+#: main.py:193
+msgid "Can't translate the App"
+msgstr ""
+
+#: main.py:210 main.py:216 main.py:270
+msgid "About"
+msgstr ""
+
+#: main.py:211 main.py:217 main.py:269
+msgid "About author"
+msgstr ""
+
+#: main.py:212 main.py:218 main.py:268
+msgid "Language"
+msgstr ""
+
+#: main.py:213 main.py:219 main.py:271
+msgid "Exit"
+msgstr ""
+
+#: main.py:228
+msgid "Booklet for Epson XP-100"
+msgstr ""
+
+#: main.py:234
+msgid "English"
+msgstr ""
+
+#: main.py:241
+msgid "Русский"
+msgstr ""
+
