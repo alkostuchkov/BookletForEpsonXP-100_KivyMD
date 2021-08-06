@@ -291,7 +291,6 @@ class MainApp(MDApp):
     def menu_lang_items_callback(self, chosen_item):
         """Callback for self.menu_lang_items."""
         self.menu_lang.dismiss()
-        print(f"menu_lang_items {chosen_item}")
         self.lang = chosen_item
 
     def on_lang(self, instance, lang):

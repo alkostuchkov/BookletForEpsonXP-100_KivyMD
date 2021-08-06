@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-08-06 18:06+0300\n"
-"PO-Revision-Date: 2021-08-06 18:27+0300\n"
+"PO-Revision-Date: 2021-08-06 18:49+0300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,11 +46,11 @@ msgstr "Рассчитать"
 
 #: main.kv:115
 msgid "Face pages"
-msgstr "Лицевые страницы:"
+msgstr "Лицевые страницы"
 
 #: main.kv:119
 msgid "Verso pages"
-msgstr "Оборотные страницы:"
+msgstr "Оборотные страницы"
 
 #: main.kv:127
 msgid "Total pages for printing: "
@@ -82,15 +82,15 @@ msgstr "Последняя страница не может быть меньш�
 
 #: main.py:105
 msgid "Total pages for printing: {}"
-msgstr "Всего страниц для печати: "
+msgstr "Всего страниц для печати: {}"
 
 #: main.py:111
 msgid "Necessary sheets for printing: {}"
-msgstr "Количество листов для печати: "
+msgstr "Количество листов для печати: {}"
 
 #: main.py:120
 msgid "The middle of the booklet: {}, {}"
-msgstr "Середина брошюры: "
+msgstr "Середина брошюры: {}, {}"
 
 #: main.py:193
 msgid "Can't translate the App"
