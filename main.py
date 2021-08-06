@@ -164,19 +164,19 @@ class Lang(Observable):
     def _(self, text):
         return self.ugettext(text)
 
-    def fbind(self, name, func, args, **kwargs):
+    def fbind(self, name, func, *largs, **kwargs):
         if name == "_":
-            self.observers.append((func, args, kwargs))
+            self.observers.append((func, largs, kwargs))
         else:
             return super(Lang, self).fbind(name, func, *largs, **kwargs)
 
-    def funbind(self, name, func, args, **kwargs):
+    def funbind(self, name, func, *largs, **kwargs):
         if name == "_":
-            key = (func, args, kwargs)
+            key = (func, largs, kwargs)
             if key in self.observers:
                 self.observers.remove(key)
         else:
-            return super(Lang, self).funbind(name, func, *args, **kwargs)
+            return super(Lang, self).funbind(name, func, *largs, **kwargs)
 
     def switch_lang(self, lang):
         # get the right locales directory, and instanciate a gettext
@@ -187,10 +187,9 @@ class Lang(Observable):
 
             # update all the kv rules attached to this text
             for func, largs, kwargs in self.observers:
-                func(largs, None, None)
+                func(*largs, None, None)
         except:
-            pass
-            # toast(MDApp.get_running_app().tr._("Can't translate the App"))
+            toast(MDApp.get_running_app().tr._("Can't translate the App"))
 
 
 class MainApp(MDApp):
@@ -224,10 +223,10 @@ class MainApp(MDApp):
             "Exit": self.tr._("Exit")
         }
         self.nav_drawer_funcs_dict = {
-            self.nav_drawer_item_names_dict[self.tr._("About")]: self.show_about,
-            self.nav_drawer_item_names_dict[self.tr._("About author")]: self.show_about_author,
-            self.nav_drawer_item_names_dict[self.tr._("Language")]: self.menu_lang_callback,
-            self.nav_drawer_item_names_dict[self.tr._("Exit")]: lambda x: sys.exit(0)
+            self.nav_drawer_item_names_dict["About"]: self.show_about,
+            self.nav_drawer_item_names_dict["About author"]: self.show_about_author,
+            self.nav_drawer_item_names_dict["Language"]: self.menu_lang_callback,
+            self.nav_drawer_item_names_dict["Exit"]: lambda x: sys.exit(0)
         }
         self.menu_lang_items = [
             {
@@ -268,10 +267,10 @@ class MainApp(MDApp):
 
     def on_start(self):
         icons_item = {
-            "web": self.nav_drawer_item_names_dict[self.tr._("Language")],
-            "account": self.nav_drawer_item_names_dict[self.tr._("About author")],
-            "information-outline": self.nav_drawer_item_names_dict[self.tr._("About")],
-            "exit-to-app": self.nav_drawer_item_names_dict[self.tr._("Exit")]
+            "web": self.nav_drawer_item_names_dict["Language"],
+            "account": self.nav_drawer_item_names_dict["About author"],
+            "information-outline": self.nav_drawer_item_names_dict["About"],
+            "exit-to-app": self.nav_drawer_item_names_dict["Exit"]
         }
         for icon_name in icons_item.keys():
             self.root.ids["content_drawer"].ids["md_list"].add_widget(

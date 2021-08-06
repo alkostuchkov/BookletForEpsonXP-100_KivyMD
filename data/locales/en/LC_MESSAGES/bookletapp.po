@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-08-06 18:06+0300\n"
+"POT-Creation-Date: 2021-08-06 23:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,63 +63,63 @@ msgstr ""
 msgid "The middle of the booklet: "
 msgstr ""
 
-#: main.py:73
+#: main.py:72
 msgid "The first page can't be empty"
 msgstr ""
 
-#: main.py:79
+#: main.py:78
 msgid "The last page can't be empty"
 msgstr ""
 
-#: main.py:86
+#: main.py:85
 msgid "Amount of pages must be more than 0"
 msgstr ""
 
-#: main.py:90
+#: main.py:89
 msgid "The last page cannot be less than the first one"
 msgstr ""
 
-#: main.py:105
+#: main.py:104
 msgid "Total pages for printing: {}"
 msgstr ""
 
-#: main.py:111
+#: main.py:110
 msgid "Necessary sheets for printing: {}"
 msgstr ""
 
-#: main.py:120
+#: main.py:119
 msgid "The middle of the booklet: {}, {}"
 msgstr ""
 
-#: main.py:193
+#: main.py:192
 msgid "Can't translate the App"
 msgstr ""
 
-#: main.py:210 main.py:216 main.py:270
-msgid "About"
-msgstr ""
-
-#: main.py:211 main.py:217 main.py:269
-msgid "About author"
-msgstr ""
-
-#: main.py:212 main.py:218 main.py:268
-msgid "Language"
-msgstr ""
-
-#: main.py:213 main.py:219 main.py:271
-msgid "Exit"
-msgstr ""
-
-#: main.py:228
+#: main.py:217
 msgid "Booklet for Epson XP-100"
 msgstr ""
 
-#: main.py:234
+#: main.py:220
+msgid "About"
+msgstr ""
+
+#: main.py:221
+msgid "About author"
+msgstr ""
+
+#: main.py:222
+msgid "Language"
+msgstr ""
+
+#: main.py:223
+msgid "Exit"
+msgstr ""
+
+#: main.py:236
 msgid "English"
 msgstr ""
 
-#: main.py:241
+#: main.py:243
 msgid "Русский"
 msgstr ""
 
