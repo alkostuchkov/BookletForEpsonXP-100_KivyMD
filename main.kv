@@ -22,7 +22,7 @@
                 pos_hint: {"center_x": .5, "top": .96}
                 size_hint: .3, .05
                 MDLabel:
-                    text: "Print:"
+                    text: app.tr._("Print:")
                     text_size: self.size
                     halign: "center"
                     valign: "bottom"
@@ -30,17 +30,28 @@
             GridLayout:
                 rows: 1
                 pos_hint: {"center_x": .5, "top": .9}
-                size_hint: .3, .05
+#                size_hint: .3, .05
+                size_hint: None, .05
+                width: dp(200)
                 CheckboxRange:
                     id: chbox_allpages
                     active: True
-                    # To avoid both of checkboxes to be inactive
                     on_active:
+                        # To avoid both of checkboxes to be inactive at the same time
                         if not self.active and not root.ids["chbox_range"].active: self.active = True
-#                    active: True
-#                    on_release: root.
+                        # Make some some widgets disabled and invisible
+                        root.ids["tf_first_page"].disabled = True
+                        root.ids["tf_first_page"].text = "1"
+                        root.clear_inputoutput_fields()
+#                        root.ids["tf_last_page"].text = ""
+#                        root.ids["tf_last_page"].text = ""
+#                        root.ids["tf_face_pages"].text = ""
+#                        root.ids["tf_verso_pages"].text = ""
+#                        root.ids["lbl_total_pages_for_printing"].opacity = 0
+#                        root.ids["lbl_necessary_sheets"].opacity = 0
+#                        root.ids["lbl_middle_of_booklet"].opacity = 0
                 MDLabel:
-                    text: "All pages"
+                    text: app.tr._("All pages")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
@@ -48,90 +59,101 @@
             GridLayout:
                 rows: 1
                 pos_hint: {"center_x": .5, "top": .85}
-                size_hint: .3, .05
+#                size_hint: .3, .05
+                size_hint: None, .05
+                width: dp(200)
                 CheckboxRange:
                     id: chbox_range
-#                    active: False
-                    # To avoid both of checkboxes to be inactive
                     on_active:
+                        # To avoid both of checkboxes to be inactive at the same time
                         if not self.active and not root.ids["chbox_allpages"].active: self.active = True
-#                    on_release: root.
+                        # Make some some widgets disabled and invisible
+                        root.ids["tf_first_page"].disabled = False
+                        root.ids["tf_first_page"].text = ""
+                        root.clear_inputoutput_fields()
+#                        root.ids["tf_last_page"].text = ""
+#                        root.ids["tf_face_pages"].text = ""
+#                        root.ids["tf_verso_pages"].text = ""
+#                        root.ids["lbl_total_pages_for_printing"].opacity = 0
+#                        root.ids["lbl_necessary_sheets"].opacity = 0
+#                        root.ids["lbl_middle_of_booklet"].opacity = 0
                 MDLabel:
-                    text: "The range"
+                    text: app.tr._("The range")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
                     font_size: root.my_font_size - 7
             GridLayout:
-                rows: 2
-                pos_hint: {"center_x": .5, "top": .8}
-                size_hint: .1, .15
+                cols: 1
+#                pos_hint: {"center_x": .5, "top": .8}
+                pos_hint: {"center_x": .5, "top": .79}
+                size_hint: .2, .15
                 MDTextField:
                     id: tf_first_page
-                    hint_text: "The first page"
-                    helper_text: "Can't be empty"
+                    disabled: True
+                    hint_text: app.tr._("The first page")
+                    helper_text: app.tr._("Can't be empty")
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
+                    text: "1"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_last_page
-                    hint_text: "The last page"
-                    helper_text: "Can't be empty"
+                    hint_text: app.tr._("The last page")
+                    helper_text: app.tr._("Can't be empty")
                     helper_text_mode: "on_error"
                     required: True
                     input_filter: "int"
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
             MDRectangleFlatButton:
                 id: btn_calculate
-                text: "Calculate"
+                text: app.tr._("Calculate")
                 size_hint: .8, .1
                 pos_hint: {"center_x": .5, "top": .6}
                 font_size: root.my_font_size
-                on_release: root.calculate()
+                on_release:
+                    root.calculate(root.ids["tf_first_page"].text, root.ids["tf_last_page"].text)
             GridLayout:
                 rows: 2
                 pos_hint: {"x": 0, "top": .45}
                 size_hint: 1, .15
                 MDTextField:
                     id: tf_face_pages
-                    hint_text: "Face pages"
-                    input_filter: "int"
+                    hint_text: app.tr._("Face pages")
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
                 MDTextField:
                     id: tf_verso_pages
-                    hint_text: "Verso pages"
-                    input_filter: "int"
+                    hint_text: app.tr._("Verso pages")
                     font_size: root.my_font_size - 5
-    #                on_focus: if self.focus: app.menu_lang.open()
             GridLayout:
                 rows: 3
                 pos_hint: {"x": 0, "top": .22}
                 size_hint: 1, .15
                 MDLabel:
                     id: lbl_total_pages_for_printing
-                    text: "Total pages for printing: {}".format(8)
+                    text: app.tr._("Total pages for printing: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
                     font_size: root.my_font_size - 5
+                    opacity: 0
                 MDLabel:
                     id: lbl_necessary_sheets
-                    text: "Necessary sheets for printing: {}".format(4)
+                    text: app.tr._("Necessary sheets for printing: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
                     font_size: root.my_font_size - 5
+                    opacity: 0
                 MDLabel:
                     id: lbl_middle_of_booklet
-                    text: "The middle of the booklet: {}".format((4, 5))
+                    text: app.tr._("The middle of the booklet: ")
                     text_size: self.size
                     halign: "left"
                     valign: "center"
                     font_size: root.my_font_size - 5
+                    opacity: 0
 #            Widget:
 #    #        MDRaisedButton:
 #            MDRectangleFlatButton:
