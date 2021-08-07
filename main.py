@@ -3,8 +3,9 @@ import os
 import gettext
 import locale
 
+from kivy.config import Config, ConfigParser
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty, ListProperty
+from kivy.properties import StringProperty, ListProperty, BooleanProperty
 from kivy.metrics import dp
 from kivy.lang import Observable
 from kivy.core.window import Window
@@ -12,6 +13,8 @@ from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivymd.theming import ThemableBehavior
 from kivymd.toast import toast
+from kivymd.uix.button import MDRaisedButton, MDFlatButton
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import (
     OneLineAvatarIconListItem,
     OneLineIconListItem, MDList,
@@ -206,6 +209,8 @@ class Lang(Observable):
 
 class MainApp(MDApp):
     """Main class."""
+    is_first_started = BooleanProperty(True)
+    dialog_switch_language = None
     # Language: get system locale.
     lang = StringProperty(locale.getdefaultlocale()[0][:2])
 
@@ -219,11 +224,30 @@ class MainApp(MDApp):
         # To avoid duplicates
         self.nav_drawer_item_names_dict = {}
         self.nav_drawer_funcs_dict = {}
+        # My config.
+        self.config = ConfigParser()
         # The current target TextInput widget requesting the keyboard
         # is presented just above the soft keyboard.
         Window.softinput_mode = "below_target"
 
+    def build_config(self, config):
+        """Default config."""
+        self.config.setdefaults("applanguage",
+                {
+                    "language": self.lang
+                })
+
+    def save_config(self):
+        """Save the App config."""
+        self.config.set("applanguage", "language", self.lang)
+        self.config.write()
+
+    def my_load_config(self):
+        """Load the App config."""
+        self.lang = self.config.get("applanguage", "language")
+
     def build(self):
+        self.my_load_config()
         # Instantiate an instance of Lang.
         self.tr = Lang(self.lang)
         self.title = self.tr._("Booklet for Epson XP-100")
@@ -288,6 +312,7 @@ class MainApp(MDApp):
             self.root.ids["content_drawer"].ids["md_list"].add_widget(
                 ItemDrawer(icon=icon_name, text=icons_item[icon_name])
             )
+        self.is_first_started = False
 
     def tbar_dots_callback(self, dots_button):
         """Callback for self.menu_dots MDDropdownMenu."""
@@ -308,8 +333,7 @@ class MainApp(MDApp):
 
     def on_stop(self):
         """Save config."""
-        # self.save_config()
-        pass
+        self.save_config()
 
     def on_pause(self):
         # Save data if needed
@@ -325,30 +349,29 @@ class MainApp(MDApp):
         # because self.tr is not defined yet.
         # The first switch will be in the build method: self.tr = Lang(self.lang)
         # after self.my_load_config().
+        if not self.is_first_started:
+            self.tr.switch_lang(lang)
 
-        # if not self.is_first_started:
-        #     self.tr.switch_lang(lang)
-        self.tr.switch_lang(lang)
-
-        # dialog = MDDialog(
-        #         title=self.tr._("Change language"),
-        #         size_hint=(.7, .4),
-        #         text_button_ok=self.tr._("Ok"),
-        #         auto_dismiss=False,
-        #         events_callback=self.stop,
-        #         text=self.tr._("You have to restart the app"
-        #                        "\nto change the language completely.")
-        #     )
-        #     dialog.open()
+            if not self.dialog_switch_language:
+                self.dialog_switch_language = MDDialog(
+                    title=self.tr._("Change language"),
+                    text=self.tr._("You have to restart the app"
+                                   "\nto change the language completely."),
+                    auto_dismiss=False,
+                    buttons=[
+                        MDRaisedButton(
+                            text=self.tr._("OK"),
+                            on_release=self.stop
+                        )
+                    ]
+                )
+                self.dialog_switch_language.open()
 
     def show_about(self, chosen_item):
         print("About")
 
     def show_about_author(self, chosen_item):
         print("About author")
-
-    def change_language(self, chosen_item):
-        print("Change language")
 
 
 if __name__ in ("__main__", "__android__"):

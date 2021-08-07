@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-08-06 23:06+0300\n"
+"POT-Creation-Date: 2021-08-07 17:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,107 +19,125 @@ msgstr ""
 msgid "Print:"
 msgstr ""
 
-#: main.kv:50
+#: main.kv:47
 msgid "All pages"
 msgstr ""
 
-#: main.kv:74
+#: main.kv:68
 msgid "The range"
 msgstr ""
 
-#: main.kv:86
+#: main.kv:81
 msgid "The first page"
 msgstr ""
 
-#: main.kv:87 main.kv:96
+#: main.kv:82 main.kv:91
 msgid "Can't be empty"
 msgstr ""
 
-#: main.kv:95
+#: main.kv:90
 msgid "The last page"
 msgstr ""
 
-#: main.kv:103
+#: main.kv:98
 msgid "Calculate"
 msgstr ""
 
-#: main.kv:115
+#: main.kv:110
 msgid "Face pages"
 msgstr ""
 
-#: main.kv:119
+#: main.kv:114
 msgid "Verso pages"
 msgstr ""
 
-#: main.kv:127
+#: main.kv:122
 msgid "Total pages for printing: "
 msgstr ""
 
-#: main.kv:135
+#: main.kv:130
 msgid "Necessary sheets for printing: "
 msgstr ""
 
-#: main.kv:143
+#: main.kv:138
 msgid "The middle of the booklet: "
 msgstr ""
 
-#: main.py:72
+#: main.py:84
 msgid "The first page can't be empty"
 msgstr ""
 
-#: main.py:78
+#: main.py:90
 msgid "The last page can't be empty"
 msgstr ""
 
-#: main.py:85
+#: main.py:97
 msgid "Amount of pages must be more than 0"
 msgstr ""
 
-#: main.py:89
+#: main.py:101
 msgid "The last page cannot be less than the first one"
 msgstr ""
 
-#: main.py:104
+#: main.py:116
 msgid "Total pages for printing: {}"
 msgstr ""
 
-#: main.py:110
+#: main.py:122
 msgid "Necessary sheets for printing: {}"
 msgstr ""
 
-#: main.py:119
+#: main.py:131
 msgid "The middle of the booklet: {}, {}"
 msgstr ""
 
-#: main.py:192
+#: main.py:207
 msgid "Can't translate the App"
 msgstr ""
 
-#: main.py:217
+#: main.py:253
 msgid "Booklet for Epson XP-100"
 msgstr ""
 
-#: main.py:220
+#: main.py:256
 msgid "About"
 msgstr ""
 
-#: main.py:221
+#: main.py:257
 msgid "About author"
 msgstr ""
 
-#: main.py:222
+#: main.py:258
 msgid "Language"
 msgstr ""
 
-#: main.py:223
+#: main.py:259
 msgid "Exit"
 msgstr ""
 
-#: main.py:236
+#: main.py:272
 msgid "English"
 msgstr ""
 
-#: main.py:243
+#: main.py:279
 msgid "Русский"
+msgstr ""
+
+#: main.py:358
+msgid "Change language"
+msgstr ""
+
+#: main.py:359
+msgid ""
+"You have to restart the app\n"
+"to change the language completely."
+msgstr ""
+
+#: main.py:364
+msgid "CANCEL"
+msgstr ""
+
+#: main.py:368
+msgid "OK"
 msgstr ""
 
