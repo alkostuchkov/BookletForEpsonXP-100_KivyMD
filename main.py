@@ -63,6 +63,15 @@ class MainContainer(BoxLayout):
     # def __init__(self, **kwargs):
     #     super().__init__(**kwargs)
 
+    def clear_inputoutput_fields(self):
+        """Clear input and output fields."""
+        self.ids["tf_last_page"].text = ""
+        self.ids["tf_face_pages"].text = ""
+        self.ids["tf_verso_pages"].text = ""
+        self.ids["lbl_total_pages_for_printing"].opacity = 0
+        self.ids["lbl_necessary_sheets"].opacity = 0
+        self.ids["lbl_middle_of_booklet"].opacity = 0
+
     def calculate(self, first_page, last_page):
         """Calculate result."""
         # root = MDApp.get_running_app().root
@@ -162,32 +171,35 @@ class Lang(Observable):
         self.switch_lang(self.lang)
 
     def _(self, text):
-        return self.ugettext(text)
+        try:
+            return self.ugettext(text)
+        except UnicodeDecodeError:
+            return self.ugettext(text.decode("utf-8"))
 
-    def fbind(self, name, func, *largs, **kwargs):
+    def fbind(self, name, func, *args, **kwargs):
         if name == "_":
-            self.observers.append((func, largs, kwargs))
+            self.observers.append((func, args, kwargs))
         else:
-            return super(Lang, self).fbind(name, func, *largs, **kwargs)
+            return super(Lang, self).fbind(name, func, *args, **kwargs)
 
-    def funbind(self, name, func, *largs, **kwargs):
+    def funbind(self, name, func, *args, **kwargs):
         if name == "_":
-            key = (func, largs, kwargs)
+            key = (func, args, kwargs)
             if key in self.observers:
                 self.observers.remove(key)
         else:
-            return super(Lang, self).funbind(name, func, *largs, **kwargs)
+            return super(Lang, self).funbind(name, func, *args, **kwargs)
 
     def switch_lang(self, lang):
-        # get the right locales directory, and instanciate a gettext
+        # get the right locales directory and instantiate a gettext
         try:
             locale_dir = os.path.join(os.path.dirname(__file__), "data", "locales")
             locales = gettext.translation("bookletapp", locale_dir, languages=[lang])
             self.ugettext = locales.gettext
 
             # update all the kv rules attached to this text
-            for func, largs, kwargs in self.observers:
-                func(*largs, None, None)
+            for func, args, kwargs in self.observers:
+                func(*args, None, None)
         except:
             toast(MDApp.get_running_app().tr._("Can't translate the App"))
 
@@ -291,6 +303,21 @@ class MainApp(MDApp):
         """Callback for self.menu_lang_items."""
         self.menu_lang.dismiss()
         self.lang = chosen_item
+        MDApp.get_running_app().root.ids["main_container"].clear_inputoutput_fields()
+        MDApp.get_running_app().root.ids["nav_drawer"].set_state("close")
+
+    def on_stop(self):
+        """Save config."""
+        # self.save_config()
+        pass
+
+    def on_pause(self):
+        # Save data if needed
+        return True
+
+    def on_resume(self):
+        # Check if any data needs replacing
+        pass
 
     def on_lang(self, instance, lang):
         """User changed language."""
